@@ -1,4 +1,3 @@
-// backend/models/FormResponse.js
 const mongoose = require('mongoose');
 
 const formResponseSchema = new mongoose.Schema({
@@ -7,18 +6,11 @@ const formResponseSchema = new mongoose.Schema({
     ref: 'Form',
     required: true,
   },
-  responses: [
-    {
-      questionId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-      },
-      answer: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  responses: {
+    type: Map,
+    of: String,
+    required: true,
+  },
 });
 
 const FormResponse = mongoose.model('FormResponse', formResponseSchema);

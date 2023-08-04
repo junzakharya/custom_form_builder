@@ -1,17 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter as Router
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import FormEditor from './components/FormEditor';
-import FormPreview from './components/FormPreview';
+import FormRenderer from './components/FormRenderer';
 
 function App() {
   return (
     <Router>
       <div>
-        <Routes>
-          <Route path="/" element={<FormEditor />} />
-          <Route path="/preview" element={<FormPreview />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/" component={FormEditor} />
+          <Route path="/preview" component={FormRenderer} />
+        </Switch>
       </div>
     </Router>
   );

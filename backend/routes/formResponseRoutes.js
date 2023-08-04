@@ -1,26 +1,25 @@
-// backend/routes/formResponseRoutes.js
 const express = require('express');
+const router = express.Router();
 const FormResponse = require('../models/FormResponse');
 
-const router = express.Router();
-
-// Create a new form response
-router.post('/', async (req, res) => {
+// Submit form response
+router.post('/responses', async (req, res) => {
   try {
-    const formResponse = await FormResponse.create(req.body);
-    res.status(201).json(formResponse);
+    const response = new FormResponse(req.body);
+    await response.save();
+    res.status(201).json(response);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: 'Failed to submit the response.' });
   }
 });
 
 // Get all form responses
-router.get('/', async (req, res) => {
+router.get('/responses', async (req, res) => {
   try {
-    const formResponses = await FormResponse.find();
-    res.json(formResponses);
+    const responses = await FormResponse.find();
+    res.json(responses);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: 'Failed to fetch responses.' });
   }
 });
 

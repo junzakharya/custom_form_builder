@@ -1,26 +1,25 @@
-// backend/routes/formRoutes.js
 const express = require('express');
+const router = express.Router();
 const Form = require('../models/Form');
 
-const router = express.Router();
-
 // Create a new form
-router.post('/', async (req, res) => {
+router.post('/forms', async (req, res) => {
   try {
-    const form = await Form.create(req.body);
+    const form = new Form(req.body);
+    await form.save();
     res.status(201).json(form);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: 'Failed to create the form.' });
   }
 });
 
 // Get all forms
-router.get('/', async (req, res) => {
+router.get('/forms', async (req, res) => {
   try {
     const forms = await Form.find();
     res.json(forms);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: 'Failed to fetch forms.' });
   }
 });
 

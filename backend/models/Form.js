@@ -1,4 +1,3 @@
-// backend/models/Form.js
 const mongoose = require('mongoose');
 
 const formSchema = new mongoose.Schema({
@@ -12,31 +11,14 @@ const formSchema = new mongoose.Schema({
   },
   questions: [
     {
-      type: {
-        type: String,
-        required: true,
-      },
-      content: {
-        type: String,
-        required: true,
-      },
-      image: {
-        type: String,
-      },
-      choices: {
-        type: [String],
-      },
-      blank: {
-        type: String,
-      },
-      color: {
-        type: String,
-      },
+      type: String,
+      content: String,
+      image: String,
+      choices: [String],
+      categories: [String],
     },
   ],
-  headerImage: {
-    type: String,
-  },
+  headerImage: String,
 });
 
 const Form = mongoose.model('Form', formSchema);
